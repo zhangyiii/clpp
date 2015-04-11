@@ -67,13 +67,13 @@ int main(int argc, const char** argv)
 	context.printInformation();
 
 	// Scan
-	//test_Scan(&context);
+	test_Scan(&context);
 
 	// Sorting : key
 	//test_Sort(&context);
 
 	// Sorting : key + value
-	test_Sort_KV(&context);
+	//test_Sort_KV(&context);
 
 	// Count
 	//test_Count(&context);
@@ -175,16 +175,16 @@ void test_Sort(clppContext* context)
 void test_Sort_KV(clppContext* context)
 {
 	////---- Satish Radix-sort : CPU
-	//if (context->isCPU)
-	//{
-	//	cout << "--------------- CPU : Key-Value : Satish sort" << endl;
-	//	for(unsigned int i = 0; i < datasetSizesCount; i++)
-	//	{
-	//		clppSort* clppsort = new clppSort_RadixSort(context, datasetSizes[i], PARAM_SORT_BITS, false);
-	//		benchmark_sort_KV(*context, clppsort, datasetSizes[i], PARAM_SORT_BITS);
-	//		delete clppsort;
-	//	}
-	//}
+	if (context->isCPU)
+	{
+		cout << "--------------- CPU : Key-Value : Satish sort" << endl;
+		for(unsigned int i = 0; i < datasetSizesCount; i++)
+		{
+			clppSort* clppsort = new clppSort_RadixSort(context, datasetSizes[i], PARAM_SORT_BITS, false);
+			benchmark_sort_KV(*context, clppsort, datasetSizes[i], PARAM_SORT_BITS);
+			delete clppsort;
+		}
+	}
 
 	////---- Bitonic-sort : CPU
 	//cout << "--------------- CPU : Key-Value : Bitonic sort" << endl;

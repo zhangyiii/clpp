@@ -4,7 +4,7 @@
 #if defined (__APPLE__) || defined(MACOSX)
 #include <OpenCL/opencl.h>
 #else
-#include <CL/opencl.h>
+#include <CL/cl.h>
 #endif
 
 enum clppVendor { Vendor_Unknown, Vendor_NVidia, Vendor_AMD, Vendor_Intel };
