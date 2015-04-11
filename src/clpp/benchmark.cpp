@@ -20,8 +20,10 @@
 #include "clpp/clppSort_BitonicSortGPU.h"
 
 #include "clpp/clppCount.h"
+#include "clpp/clppScan.h"
 
 #include <string.h>
+#include <vector>
 
 using namespace std;
 
@@ -83,28 +85,29 @@ int main(int argc, const char** argv)
 
 void test_Scan(clppContext* context)
 {
-	//---- Default scan
+	std::vector<clppScan*> scans;
 	if (context->isCPU)
-	{
 		cout << "--------------- Scan : CPU scan" << endl;
-		for(unsigned int i = 0; i < datasetSizesCount; i++)
-		{
-			clppScan* scan = new clppScan_Default(context, sizeof(int), datasetSizes[i]);
-			benchmark_scan(context, scan, datasetSizes[i]);
-			delete scan;
+	else
+		cout << "--------------- Scan : GPU scan" << endl;
+	for (unsigned int i = 0; i < datasetSizesCount; i++)
+	{
+		if (context->isGPU) {
+			scans.push_back( new clppScan_GPU(context, sizeof(int), datasetSizes[i]));
+		}
+		else {
+			scans.push_back( new clppScan_Default(context, sizeof(int), datasetSizes[i]));
 		}
 	}
 
-	//---- GPU scan
-	else if (context->isGPU)
-	{
-		cout << "--------------- Scan : GPU scan" << endl;
-		for(unsigned int i = 0; i < datasetSizesCount; i++)
-		{
-			clppScan* scan = new clppScan_GPU(context, sizeof(int), datasetSizes[i]);
-			benchmark_scan(context, scan, datasetSizes[i]);
-			delete scan;
-		}
+	auto i = 0;
+	for (auto& scan : scans) {
+		benchmark_scan(context, scans[0], datasetSizes[i++]);
+	}
+
+
+	for (auto& scan : scans) {
+		delete scan;
 	}
 }
 
