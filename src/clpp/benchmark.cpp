@@ -63,7 +63,7 @@ int main(int argc, const char** argv)
 
 	//---- Prepare a clpp Context
 	clppContext context;
-	context.setup(1, 0);
+	context.setup(0, 0);
 	context.printInformation();
 
 	// Scan
@@ -96,7 +96,7 @@ void test_Scan(clppContext* context)
 	}
 
 	//---- GPU scan
-	if (context->isGPU)
+	else if (context->isGPU)
 	{
 		cout << "--------------- Scan : GPU scan" << endl;
 		for(unsigned int i = 0; i < datasetSizesCount; i++)
@@ -106,9 +106,6 @@ void test_Scan(clppContext* context)
 			delete scan;
 		}
 	}
-
-	//scan = new clppScan_Merrill(context, datasetSize);
-	//benchmark_scan(context, scan);
 }
 
 #pragma endregion
