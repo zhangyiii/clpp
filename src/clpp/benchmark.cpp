@@ -5,6 +5,7 @@
 // The number of bits to sort
 #define PARAM_SORT_BITS 32
 
+#include <conio.h>
 #include <stdlib.h>
 #include <algorithm>
 
@@ -65,11 +66,13 @@ int main(int argc, const char** argv)
 
 	//---- Prepare a clpp Context
 	clppContext context;
-	context.setup(0, 0);
+	context.setup(1, 0);
 	context.printInformation();
 
 	// Scan
 	test_Scan(&context);
+
+	getchar();
 
 	// Sorting : key
 	//test_Sort(&context);
@@ -102,7 +105,7 @@ void test_Scan(clppContext* context)
 
 	auto i = 0;
 	for (auto& scan : scans) {
-		benchmark_scan(context, scans[0], datasetSizes[i++]);
+		benchmark_scan(context, scan, datasetSizes[i++]);
 	}
 
 
@@ -259,7 +262,7 @@ void benchmark_scan(clppContext* context, clppScan* scan, int datasetSize)
 	unsigned int* cpuScanValues = (unsigned int*)malloc(datasetSize * sizeof(int));
 	memcpy(cpuScanValues, values, datasetSize * sizeof(int));
 	cpuScanValues[0] = 0;
-	for(unsigned int i = 1; i < datasetSize; i++)
+	for(int i = 1; i < datasetSize; i++)
 		cpuScanValues[i] = cpuScanValues[i-1] + values[i - 1];
 
 	//--- Scan
@@ -296,7 +299,7 @@ void benchmark_sort(clppContext context, clppSort* sort, unsigned int datasetSiz
 	//---- Create a new set of random datas
 	unsigned int* keys = (unsigned int*)malloc(datasetSize * sizeof(int));
 
-	float time = 0;
+	double time = 0;
 	for(unsigned int i = 0; i < PARAM_BENCHMARK_LOOPS; i++)
 	{
 		makeRandomInt32Vector(keys, datasetSize, bits, true);  

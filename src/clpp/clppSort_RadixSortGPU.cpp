@@ -396,8 +396,6 @@ void clppSort_RadixSortGPU::popDatas()
 
 void clppSort_RadixSortGPU::popDatas(void* dataSet)
 {
-	cl_int clStatus;
-
 	if (_keysOnly)
 	{
 		if ((_bits/4) % 2 == 0)
