@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="OpenCL Files">
+      <UniqueIdentifier>{67660bba-afb6-4350-ad3c-cdf7551e1448}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\clpp\benchmark.cpp">
@@ -100,5 +103,28 @@
     <ClInclude Include="src\clpp\StopWatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\clpp\clppCount.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+    <None Include="src\clpp\clppScan_Default.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+    <None Include="src\clpp\clppScan_GPU.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+    <None Include="src\clpp\clppSort_BitonicSort.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+    <None Include="src\clpp\clppSort_BitonicSortGPU.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+    <None Include="src\clpp\clppSort_RadixSort.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+    <None Include="src\clpp\clppSort_RadixSortGPU.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
